@@ -8,8 +8,8 @@ public class MyTask extends Task {
     }
 
     @Override
-    public String toString() {
-        return getClass().getName() + "_withId_" + producerID + "_number_" + waitTime;
+    public @NotNull String toString() {
+        return getClass().getName() + "_withId_" + producerID + "_number_" + taskNumber;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package galeev;
 
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +15,7 @@ public class UniformDistributor extends Producer {
     }
 
     @Override
-    public Task getNewTask() {
+    public @NotNull Task getNewTask() {
         int newTaskNumber = this.newTaskNumber.getAndIncrement();
         LOG.info(getProducerName() + " start producing " + newTaskNumber);
         try {

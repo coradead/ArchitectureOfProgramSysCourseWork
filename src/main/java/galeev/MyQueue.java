@@ -1,5 +1,7 @@
 package galeev;
 
+import org.jetbrains.annotations.NotNull;
+
 public class MyQueue<E extends Task> extends Queue<E> {
     int newestIndex;
 
@@ -21,7 +23,7 @@ public class MyQueue<E extends Task> extends Queue<E> {
     }
 
     @Override
-    protected E dequeue() {
+    protected @NotNull E dequeue() {
         // assert lock.isHeldByCurrentThread();
         // assert lock.getHoldCount() == 1;
         @SuppressWarnings("unchecked")
@@ -51,7 +53,7 @@ public class MyQueue<E extends Task> extends Queue<E> {
     }
 
     @Override
-    protected E reject() {
+    protected @NotNull E reject() {
         @SuppressWarnings("unchecked")
         E e = (E) items[newestIndex];
         items[newestIndex] = null;

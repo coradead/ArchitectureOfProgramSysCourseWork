@@ -1,6 +1,7 @@
 package galeev;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -21,10 +22,31 @@ public abstract class Queue<E extends Task> {
         notEmpty = lock.newCondition();
     }
 
+    /**
+     * Inserts element in queue.
+     * Should be at least protected, because usual user should use {@link Queue#put(Task)}.
+     * Here only should be logic of extracting element.
+     * There always will be place for new element.
+     * @param e element to insert
+     */
     protected abstract void enqueue(E e);
 
+    /**
+     * Should be at least protected, because usual user should use {@link Queue#take()}.
+     * Here only should be logic of inserting element.
+     * There always will be item to return.
+     * @return element from queue
+     */
+    @NotNull
     protected abstract E dequeue();
 
+    /**
+     * Should be at least protected, because usual user should not use it.
+     * Here only should be logic of rejecting element.
+     * There always will be item to reject.
+     * @return rejected element
+     */
+    @NotNull
     protected abstract E reject();
 
     @SuppressWarnings("unchecked")
@@ -43,6 +65,7 @@ public abstract class Queue<E extends Task> {
     }
 
     // Returns rejected E (null if nothing was rejected)
+    @Nullable
     public E put(@NotNull E e) {
         final ReentrantLock lock = this.lock;
         lock.lock();

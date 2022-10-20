@@ -26,10 +26,15 @@ public abstract class Producer {
         }, "Thread_" + producer.getProducerName());
     }
 
-    public abstract Task getNewTask();
-
+    /**
+     * Should affect {@link Producer#newTaskNumber}.
+     * @return new Task initialized object.
+     */
     @NotNull
-    public String getProducerName() {
+    public abstract Task getNewTask();
+    
+    @NotNull
+    public final String getProducerName() {
         return this.getClass().getName() + "_" + producerId;
     }
 

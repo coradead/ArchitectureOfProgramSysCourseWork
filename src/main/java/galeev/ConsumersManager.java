@@ -31,11 +31,13 @@ public abstract class ConsumersManager {
         }
     }
 
-    // Returns free consumers element, or null when there is no free consumers
+    /**
+     * @return free {@link ConsumersManager#consumers}' element, or null when there is no free consumers
+     */
     @Nullable
     protected abstract Consumer chooseNewConsumer();
 
-    //  Нужен ли generic
+    //  Нужен ли generic?
     public static class Consumer extends Thread {
 
         protected final Object threadDoneCondition;
